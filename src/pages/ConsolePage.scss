@@ -1,0 +1,75 @@
+.console-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Roboto Mono', monospace;
+  background-color: #f5f5f5;
+  padding: 10px;
+
+  .warning {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  .conversation-area, .book-preview {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    button {
+      flex: 1;
+      height: 50px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .console-page {
+    padding: 20px;
+
+    .content {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .conversation-area, .book-preview {
+      flex: 1;
+    }
+  }
+}

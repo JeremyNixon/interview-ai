@@ -1,0 +1,4 @@
+openai-realtime-console/
+.DS_Store
+node_modules
+.env
