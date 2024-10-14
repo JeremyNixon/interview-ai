@@ -16,9 +16,9 @@ import { RealtimeClient } from '@openai/realtime-api-beta';
 import { WavRecorder, WavStreamPlayer } from '../lib/wavtools/index.js';
 import { instructions } from '../utils/conversation_config.js';
 import { Button } from '../components/button/Button';
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import { TDocumentDefinitions } from "pdfmake/interfaces";
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import './ConsolePage.scss';
 
 export function ConsolePage() {
@@ -34,11 +34,15 @@ export function ConsolePage() {
         : {
             apiKey: process.env.REACT_APP_OPENAI_API_KEY,
             dangerouslyAllowAPIKeyInBrowser: true,
-          }
-    )
+          },
+    ),
   );
-  const wavRecorderRef = useRef<WavRecorder>(new WavRecorder({ sampleRate: 24000 }));
-  const wavStreamPlayerRef = useRef<WavStreamPlayer>(new WavStreamPlayer({ sampleRate: 24000 }));
+  const wavRecorderRef = useRef<WavRecorder>(
+    new WavRecorder({ sampleRate: 24000 }),
+  );
+  const wavStreamPlayerRef = useRef<WavStreamPlayer>(
+    new WavStreamPlayer({ sampleRate: 24000 }),
+  );
 
   useEffect(() => {
     // Load saved data from localStorage
@@ -50,7 +54,8 @@ export function ConsolePage() {
     // Set up event listener for beforeunload
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
-      e.returnValue = 'You may lose unsaved progress if you leave. Are you sure?';
+      e.returnValue =
+        'You may lose unsaved progress if you leave. Are you sure?';
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
 
@@ -76,7 +81,12 @@ export function ConsolePage() {
       await wavStreamPlayer.connect();
       await client.connect();
       await client.updateSession({ turn_detection: null });
-      client.sendUserMessageContent([{ type: 'input_text', text: 'Hello! I\'m ready to start our interview.' }]);
+      client.sendUserMessageContent([
+        {
+          type: 'input_text',
+          text: "Hello! I'm ready to start our interview.",
+        },
+      ]);
     } catch (error) {
       console.error('Error connecting:', error);
       setIsConnected(false);
@@ -102,17 +112,14 @@ export function ConsolePage() {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     const docDefinition: TDocumentDefinitions = {
-      content: [
-        { text: 'Your Book', style: 'header' },
-        bookContent
-      ],
+      content: [{ text: 'Your Book', style: 'header' }, bookContent],
       styles: {
         header: {
           fontSize: 18,
           bold: true,
-          margin: [0, 0, 0, 10] as [number, number, number, number]
-        }
-      }
+          margin: [0, 0, 0, 10] as [number, number, number, number],
+        },
+      },
     };
 
     // Create and download the PDF
@@ -127,7 +134,7 @@ export function ConsolePage() {
     client.on('conversation.updated', async ({ item, delta }: any) => {
       if (delta?.text) {
         setConversationText((prev) => prev + delta.text);
-        
+
         // Update book content
         const bookUpdatePrompt = `Based on the following conversation, continue writing the book:
         
@@ -138,25 +145,31 @@ export function ConsolePage() {
         ${bookContent}
         
         Continue the book:`;
-        
-        const bookResponse = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
+
+        const bookResponse = await fetch(
+          'https://api.openai.com/v1/chat/completions',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+            },
+            body: JSON.stringify({
+              model: 'gpt-4',
+              messages: [{ role: 'user', content: bookUpdatePrompt }],
+              stream: true,
+            }),
           },
-          body: JSON.stringify({
-            model: 'gpt-4',
-            messages: [{ role: 'user', content: bookUpdatePrompt }],
-            stream: true
-          })
-        });
+        );
 
         const reader = bookResponse.body?.getReader();
         const decoder = new TextDecoder();
 
         while (true) {
-          const { done, value } = await reader?.read() || { done: true, value: undefined };
+          const { done, value } = (await reader?.read()) || {
+            done: true,
+            value: undefined,
+          };
           if (done) break;
           const chunk = decoder.decode(value);
           const lines = chunk.split('\n');
@@ -187,9 +200,6 @@ export function ConsolePage() {
 
   return (
     <div className="console-page">
-      <div className="warning">
-        Warning: Your progress is saved locally. Clearing your browser data or using a different device may result in loss of progress.
-      </div>
       <div className="content">
         <div className="conversation-area">
           <h3>Conversation</h3>
