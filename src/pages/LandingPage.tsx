@@ -13,16 +13,17 @@ export function LandingPage() {
       <main>
         <h2>Turn Your Interview into a Book</h2>
         <p>
-          Engage in a deep, meaningful interview with our AI. As you talk, we learn about you,
-          your thoughts, and your experiences. When you're ready, we'll transform your interview
-          into a published book on Amazon with just one click.
+          Engage in a deep, meaningful interview with our AI. As you talk, we
+          learn about you, your thoughts, and your experiences. When you're
+          ready, we'll transform your interview into a published book on Amazon
+          with just one click.
         </p>
         <Link to="/console">
           <Button label="Start Your Interview" buttonStyle="action" />
         </Link>
       </main>
       <footer>
-        <p>© 2024 interview.ai. All rights reserved.</p>
+        <p>2024 interview.ai</p>
       </footer>
     </div>
   );
