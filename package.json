@@ -15,7 +15,6 @@
     "@types/node": "^16.18.108",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
-    "@types/react-router-dom": "^5.3.3",
     "@types/socket.io-client": "^3.0.0",
     "axios": "^1.7.7",
     "cors": "^2.8.5",
@@ -24,12 +23,10 @@
     "jspdf": "^2.5.2",
     "leaflet": "^1.9.4",
     "openai": "^4.67.3",
-    "pdfmake": "^0.2.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-feather": "^2.0.10",
     "react-leaflet": "^4.2.1",
-    "react-router-dom": "^6.27.0",
     "react-scripts": "^5.0.1",
     "sass": "^1.78.0",
     "save": "^2.9.0",
@@ -66,9 +63,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@types/jspdf": "^2.0.0",
     "@types/lodash": "^4.17.10",
-    "@types/pdfmake": "^0.2.9",
     "nodemon": "^3.1.7"
   }
 }

@@ -24,10 +24,6 @@
     user-select: none;
   }
 
-  div.label.right {
-    margin-left: -8px;
-  }
-
   .toggle-background {
     background-color: #101010;
     position: absolute;
@@ -41,13 +37,13 @@
   }
 
   &[data-enabled='true'] {
-    div.label.right {
+    div.label {
       color: #fff;
     }
   }
 
   &[data-enabled='false'] {
-    div.label.left {
+    div.label {
       color: #fff;
     }
   }

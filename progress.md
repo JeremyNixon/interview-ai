@@ -1,0 +1,11 @@
+## Business Model Update
+- Shifted focus to facilitating deep and meaningful conversations for book creation.
+- Enabled conversations in any language, enhancing user accessibility.
+- Removed camera functionality; application will now only require microphone access.
+- Implemented push-to-talk feature for user convenience.
+- Integrated GPT-4o to process conversation context and generate text responses.
+- Enabled exporting of conversations in Amazon KDP ready format as PDF.
+- Designed user experience flow:
+  - Landing page with call-to-action leading to the console.
+  - As users speak, text responses stream on the right, formatted for KDP.
+- Users can stop the conversation at any time and export their book.
